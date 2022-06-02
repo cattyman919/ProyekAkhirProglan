@@ -1,5 +1,8 @@
 #include "sorting.h"
+#include "dataStruct.h"
 
+#ifndef functions.h
+#define functions.h
 
 // Function prototype
 const char* getKategoriNama(KategoriEnum kategori);
@@ -7,7 +10,7 @@ void rekursiForLoopBarang(int i , stock barang[], int totalBarang);
 void instruksiPencet();
 void inputStockBarang(stock *barang, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
 void outputStockBarang(stock barang, int i);
-void fiturPengurutanData(stock barang[], int total);
+void fiturPengurutanData(struct stockLink *head);
 int searchData (char* pat, char* txt);
 void fiturMencariData(stock barang[], int totalBarang);
 void menambahkanStockBarang(stock barang[], int totalBarang);
@@ -85,7 +88,7 @@ void outputStockBarang(stock barang, int i){
 }
 
 // mengurutkan barang sesuai kriteria yang dipilih
-void fiturPengurutanData(stock barang[], int total){
+void fiturPengurutanData(stockL *head){
 
 	int inputPilihan;
 	
@@ -107,22 +110,22 @@ void fiturPengurutanData(stock barang[], int total){
 	
 	switch(inputPilihan){
 		case 1 :
-			sortAlphabet(barang, total);
+			sortAlphabetL(head);
 			break;
 		case 2 :
-			sortKategori(barang, total);
+			sortKategoriL(head);
 			break;
 		case 3 :
-			sortBarangTerlaris(barang, total);
+			sortBarangTerlarisL(head);
 			break;
 		case 4 :
-			sortHarga(barang, total);
+			sortHargaL(head);
 			break;
 		case 5 :
-			sortMasaExpired(barang, total);
+			sortMasaExpiredL(head);
 			break;
 		case 6 :
-			sortSisaStock(barang, total);
+			sortSisaStockL(head);
 			break;
 	}
 }
@@ -424,3 +427,5 @@ void printDataLink(struct stockLink *head){
 		i++;
 	}
 }
+
+#endif

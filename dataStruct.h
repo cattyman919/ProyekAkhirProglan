@@ -1,3 +1,6 @@
+#ifndef dataStruct.h
+#define dataStruct.h
+
 // Enumerator kategori untuk kategori stock barang
 typedef enum Kategori{
 	AlatTulis,
@@ -35,3 +38,5 @@ typedef struct stockLink{
 	Date expiredDate;
 	struct stockLink *next;	
 } stockL;
+
+#endif

@@ -17,12 +17,6 @@ int main(){
 	int totalBarang = 4;
 	int pilihanFitur;
 	
-	// Menyediakan Data Stock Barang Awal
-	inputStockBarang(&stockBarang[0], "Sariroti keju", Makanan, 5000, 12, 20, 25,4,2022);
-	inputStockBarang(&stockBarang[1], "Pepsi 1,5L", Minuman, 15000, 20, 50, 7,12,2022);
-	inputStockBarang(&stockBarang[2], "Kemeja Batik", Pakaian, 70000, 3, 5, 1,1,2030);
-	inputStockBarang(&stockBarang[3], "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
-	
 	//data awal linked list
 	strcpy(tmp->nama, "Sariroti keju");
 	tmp->kategori = Makanan;
@@ -72,7 +66,7 @@ int main(){
 		switch(pilihanFitur){
 			
 			case 1 : 
-				fiturPengurutanData(stockBarang, totalBarang);
+				fiturPengurutanData(head);
 				break;
 				
 			case 2 :

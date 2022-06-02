@@ -37,11 +37,11 @@ int main(){
 	// data awal binary tree
 	treeNode *root = createTreeNode(10);
 	root->leftPtr = createTreeNode(5);
-	root->rightPtr = createTreeNode(9);
+	root->rightPtr = createTreeNode(7);
 	
 	
 	do {
-		int i = 0;
+		int i = 0, data;
 		
 		printf("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< PROGRAM STOCK BARANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
 		printf("Stock Barang Saat Ini : \n");
@@ -70,15 +70,18 @@ int main(){
 			
 			case 1 : 
 				fiturPengurutanData(head);
-				break;
+				
+			break;
 				
 			case 2 :
 				fiturMencariDataL(head);
-				break;
+				
+			break;
 			
 			case 3 : 
 				menambahkanStockBarangL(head);
-				break;
+				
+			break;
 			
 			case 4 :
 				// Kalau tidak ada stock barang, tidak bisa hapus pilihan barang
@@ -89,7 +92,7 @@ int main(){
 					printf("Tidak bisa menghapus pilihan stock barang karena tidak ada stock barang\n");
 				}
 
-				break;
+			break;
 				
 			case 5 :
 				// Kalau tidak ada stock barang, tidak bisa edit pilihan barang
@@ -100,7 +103,15 @@ int main(){
 					printf("Tidak bisa mengedit pilihan stock barang karena tidak ada stock barang\n");
 				}
 				
-				break;
+			break;
+			
+			case 6 :
+
+				printf("Masukkan angka untuk data node : ");
+				scanf(" %d", &data);
+				insertNode(&root,data);
+				
+			break;
 		}
 		
 	} while(pilihanFitur != 10);

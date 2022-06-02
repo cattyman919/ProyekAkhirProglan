@@ -14,10 +14,10 @@ void inOrder (treeNode *root);
 void preOrder (treeNode *root);
 void postOrder (treeNode *root);
 treeNode* createTreeNode(int data);
-void insertNode (treeNode *root, int data);
+void insertNode (treeNode **root, int data);
 
 void instruksiPencetTree(){
-	printf("\nPencet 6 untuk add/insert node\n");
+	printf("Pencet 6 untuk add/insert node\n");
 	printf("Pencet 7 untuk edit node\n");
 	printf("Pencet 8 untuk delete node\n");
 	printf("Pencet 9 untuk edit node\n");
@@ -68,23 +68,26 @@ treeNode* createTreeNode(int data){
 	
 }
 
-void insertNode(treeNode *root, int data){
-	if(root == NULL){
-		root = createTreeNode(data);
+void insertNode(treeNode **root, int data){
+	
+	if(*root == NULL){
+		
+		*root = createTreeNode(data);
 		return;
 	}
 	
-	if(data < root->data){
-		insertNode(&(root->leftPtr),  data);
+	if(data < (*root)->data){
+		insertNode(&((*root)->leftPtr),  data);
 	}
 	
-	else if (data > root->data){
-		insertNode(&(root->rightPtr), data);
+	else if (data > (*root)->data){
+		insertNode(&((*root)->rightPtr), data);
 	}
 	
 	else{
-		printf("duplicate number\n");	
+		printf("Angka Duplikat\n\n");	
 	}
+	
 	
 }
 

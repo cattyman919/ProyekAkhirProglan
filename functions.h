@@ -25,12 +25,13 @@ void menambahkanStockBarang(stock barang[], int totalBarang);
 void menambahkanStockBarangL(struct stockLink *head);
 
 void menghapusPilihanStockBarang(stock *barang, int totalBarang);
+void menghapusPilihanStockBarangL(struct stockLink **head);
 
 void editStockBarang(stock barang[], int totalBarang);
 
 void printDataLink(struct stockLink *head);
 
-
+int totalBarangList(struct stockLink *head);
 
 // Untuk mendapatkan string dari Enumerator Kategori
 const char* getKategoriNama(KategoriEnum kategori){
@@ -87,6 +88,37 @@ void inputStockBarang(stock *barang, char nama[200], KategoriEnum kategori,int h
 	barang->expiredDate.dd = hari;
 	barang->expiredDate.mm = bulan;
 	barang->expiredDate.yyyy = tahun;
+}
+
+void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun){
+	struct stockLink *input = malloc(sizeof(struct stockLink));
+	// Mengisi Nama
+	strcpy(input->nama, nama);
+	
+	// Mengisi kategori barang
+	input->kategori = kategori;
+	
+	// Mengisi harga barang
+	input->hargaBarang = hargaBarang;
+	
+	// Mengisi sisa stock barang
+	input->sisaStock = sisaStock;
+	
+	// Mengisi barang yang terjual
+	input->AmountSold = AmountSold;
+	
+	// Mengisi Expired Date
+	input->expiredDate.dd = hari;
+	input->expiredDate.mm = bulan;
+	input->expiredDate.yyyy = tahun;
+	input->next = NULL;
+	
+	struct stockLink *temp = head;
+	while(temp->next != NULL){
+		temp = temp->next;
+	}
+	temp->next = input;
+	return;
 }
 
 // menampilkan hasil yang sudah ada dalam bentuk tabel
@@ -456,6 +488,45 @@ void menghapusPilihanStockBarang(stock *barang, int totalBarang){
 	}
 }
 
+void menghapusPilihanStockBarangL(struct stockLink **head){
+	
+	int index = 0;
+
+	// Error Handling jika dimasukan salah input
+	do{
+
+		printf("Input Pilihan Index Stock Barang yang Ingin Dihapus : ");
+		scanf(" %d", &index);
+		
+		if(index > totalBarangList(*head) || index < 1){
+			printf("Input yang dimasukan salah, Index melebihi atau melewati batas dari total stock barang\n");
+		}
+	}while(index > totalBarangList(*head) || index < 1);
+	
+	struct stockLink *pointer  = *head;
+	struct stockLink *pointer2 = *head;
+	
+	if(index == 1)
+	{
+		*head = pointer->next;
+		free(pointer);
+		pointer = NULL;
+	}
+	else
+	{
+		while (index != 1)
+		{
+			pointer2 = pointer;
+			pointer = pointer->next;
+			index--;
+		}
+		
+		pointer2->next = pointer->next;
+		free(pointer);
+		pointer = NULL;
+	}
+}
+
 // mengedit stock barang yang sudah ada
 void editStockBarang(stock barang[], int totalBarang){
 	
@@ -535,38 +606,6 @@ void editStockBarang(stock barang[], int totalBarang){
 	sisaStock,AmountSold,hari,bulan,tahun);
 }
 
-void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun){
-	struct stockLink *input = malloc(sizeof(struct stockLink));
-	// Mengisi Nama
-	strcpy(input->nama, nama);
-	
-	// Mengisi kategori barang
-	input->kategori = kategori;
-	
-	// Mengisi harga barang
-	input->hargaBarang = hargaBarang;
-	
-	// Mengisi sisa stock barang
-	input->sisaStock = sisaStock;
-	
-	// Mengisi barang yang terjual
-	input->AmountSold = AmountSold;
-	
-	// Mengisi Expired Date
-	input->expiredDate.dd = hari;
-	input->expiredDate.mm = bulan;
-	input->expiredDate.yyyy = tahun;
-	input->next = NULL;
-	
-	struct stockLink *temp = head;
-	while(temp->next != NULL){
-		temp = temp->next;
-	}
-	temp->next = input;
-	return;
-}
-
-
 void printDataLink(struct stockLink *head){
 	int i = 1;
 	struct stockLink *barang = head;
@@ -580,6 +619,22 @@ void printDataLink(struct stockLink *head){
 		barang = barang->next;
 		i++;
 	}
+}
+
+int totalBarangList(struct stockLink *head){
+	struct stockLink *pointer = head;
+	int count = 0;
+	
+	if(pointer == NULL){
+		return count;
+	}
+	
+	while(pointer != NULL){
+		pointer = pointer->next;
+		count++;
+	}
+
+	return count;	
 }
 
 #endif

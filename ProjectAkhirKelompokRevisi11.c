@@ -32,7 +32,6 @@ int main(){
 	inputStockBarangL(head, "Kemeja Batik", Pakaian, 70000, 3, 5, 1,1,2030);
 	inputStockBarangL(head, "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
 
-	
 	do {
 		int i = 0;
 		
@@ -71,9 +70,11 @@ int main(){
 			case 4 :
 				// Kalau tidak ada stock barang, tidak bisa hapus pilihan barang
 				if(head != NULL){
-					menghapusPilihanStockBarang(stockBarang, totalBarang);
+					//menghapus=PilihanStockBarang(stockBarang, totalBarang);
+					menghapusPilihanStockBarangL(&head);
 					totalBarang--;
 				}
+				
 				else{
 					printf("Tidak bisa menghapus pilihan stock barang karena tidak ada stock barang\n");
 				}

@@ -36,9 +36,18 @@ int main(){
 		int i = 0;
 		
 		printf("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< PROGRAM STOCK BARANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
-			
+		printf("Stock Barang Saat Ini : \n");
+		
 		printf("\nData Linked List : \n\n");
-		printDataLink(head);
+		printf("|No\t |Nama barang\t |Kategori\t |Harga\t\t |Sisa Stock\t |Jumlah Terjual\t |Expired Date\n\n");
+			
+		
+		if(totalBarangList(head) > 0)
+			printDataLink(head);
+	
+		else{
+			printf("Tidak ada stock barang untuk saat ini \n");
+		}
 		
 		instruksiPencet();
 		
@@ -84,7 +93,7 @@ int main(){
 			case 5 :
 				// Kalau tidak ada stock barang, tidak bisa edit pilihan barang
 				if(totalBarang > 0){
-					editStockBarang(stockBarang, totalBarang);
+					editStockBarangL(head);
 				}
 				else{
 					printf("Tidak bisa mengedit pilihan stock barang karena tidak ada stock barang\n");

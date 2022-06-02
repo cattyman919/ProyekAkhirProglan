@@ -1,11 +1,12 @@
 #include "sorting.h"
 #include "dataStruct.h"
 
-#ifndef functions.h
-#define functions.h
+#ifndef functions
+#define functions
 
 // Function prototype
 const char* getKategoriNama(KategoriEnum kategori);
+
 void instruksiPencet();
 
 void inputStockBarangL (struct stockLink *head, char nama[500], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
@@ -13,6 +14,7 @@ void inputStockBarangL (struct stockLink *head, char nama[500], KategoriEnum kat
 void outputStockBarangIndexL(struct stockLink *head, int i);
 
 void fiturPengurutanData(struct stockLink *head);
+
 int searchData (char* pat, char* txt);
 
 void fiturMencariDataL(struct stockLink *head);

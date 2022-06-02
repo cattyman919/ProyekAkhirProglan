@@ -1,5 +1,5 @@
-#ifndef dataStruct.h
-#define dataStruct.h
+#ifndef dataStruct
+#define dataStruct
 
 // Enumerator kategori untuk kategori stock barang
 typedef enum Kategori{

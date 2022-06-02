@@ -15,4 +15,4 @@ This header contains functions to use in the code
 This header contains the sorting algorithms that used for sorting the stocks
 
 
-Note : kalo bisa ditambahin lagi isinya, masih dikit readme nya
+Note : kalo bisa ditambahin lagi isinya, masih dikit note readme nya

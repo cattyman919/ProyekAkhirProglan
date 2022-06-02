@@ -8,18 +8,29 @@
 const char* getKategoriNama(KategoriEnum kategori);
 void rekursiForLoopBarang(int i , stock barang[], int totalBarang);
 void instruksiPencet();
+
 void inputStockBarang(stock *barang, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
-void outputStockBarang(stock barang, int i);
+void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
+
+void outputStockBarangIndex(stock barang, int i);
+void outputStockBarangIndexL(struct stockLink *head, int i);
+
 void fiturPengurutanData(struct stockLink *head);
 int searchData (char* pat, char* txt);
+
 void fiturMencariData(stock barang[], int totalBarang);
+void fiturMencariDataL(struct stockLink *head);
+
 void menambahkanStockBarang(stock barang[], int totalBarang);
+void menambahkanStockBarangL(struct stockLink *head);
+
 void menghapusPilihanStockBarang(stock *barang, int totalBarang);
+
 void editStockBarang(stock barang[], int totalBarang);
 
 void printDataLink(struct stockLink *head);
-void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
-void menambahkanStockBarangL(struct stockLink *head);
+
+
 
 // Untuk mendapatkan string dari Enumerator Kategori
 const char* getKategoriNama(KategoriEnum kategori){
@@ -38,7 +49,7 @@ void rekursiForLoopBarang(int i , stock barang[], int totalBarang){
 	if(i == totalBarang)
 		return;
 			
-	outputStockBarang(barang[i], i+1);
+	outputStockBarangIndex(barang[i], i+1);
 	
 	rekursiForLoopBarang(i+1 , barang, totalBarang);
 }
@@ -79,13 +90,22 @@ void inputStockBarang(stock *barang, char nama[200], KategoriEnum kategori,int h
 }
 
 // menampilkan hasil yang sudah ada dalam bentuk tabel
-void outputStockBarang(stock barang, int i){
+void outputStockBarangIndex(stock barang, int i){
 	printf("|%d\t |%s\t |%s\t |Rp %d\t", i ,barang.nama, getKategoriNama(barang.kategori), barang.hargaBarang);
 	printf(" |%d\t\t |%d\t\t\t", barang.sisaStock, barang.AmountSold);
 	printf(" |%d/%d/%d\n", 
 		barang.expiredDate.dd,
 		barang.expiredDate.mm,
 		barang.expiredDate.yyyy);
+}
+
+void outputStockBarangIndexL(struct stockLink *head, int i){
+	printf("|%d\t |%s\t |%s\t |Rp %d\t", i ,head->nama, getKategoriNama(head->kategori), head->hargaBarang);
+	printf(" |%d\t\t |%d\t\t\t", head->sisaStock, head->AmountSold);
+	printf(" |%d/%d/%d\n", 
+		head->expiredDate.dd,
+		head->expiredDate.mm,
+		head->expiredDate.yyyy);
 }
 
 // mengurutkan barang sesuai kriteria yang dipilih
@@ -164,12 +184,38 @@ void fiturMencariData(stock barang[], int totalBarang){
 	for(i = 0; i < totalBarang ; i++){
 		if(searchData(searchKey, barang[i].nama) == 1){
 			DitemukanBarang = 1;
-			outputStockBarang(barang[i], i+1);
+			outputStockBarangIndex(barang[i], i+1);
 		}
 	}
 	if(DitemukanBarang == 0){
 		printf("\t\t Tidak ada barang yang ditemukan berdasarkan pencarian nama : \'%s\' \n", searchKey);
 	}
+}
+
+void fiturMencariDataL(struct stockLink *head){
+	
+	int i, DitemukanBarang = 0;
+	char searchKey[500];
+	printf("\nInput nama barang yang ingin dicari : ");
+	scanf(" %[^\n]", searchKey);
+	printf("\n|No\t |Nama barang\t |Kategori\t |Harga\t\t |Sisa Stock\t |Jumlah Terjual\t |Expired Date\n\n");
+	
+	struct stockLink *temp = head;
+	int counter = 1;
+	while(temp->next != NULL){
+		
+		if(searchData(searchKey, temp->nama) == 1){
+			DitemukanBarang = 1;
+			outputStockBarangIndexL(temp, counter);
+		}
+		counter++;
+		temp = temp->next;
+	}
+	
+	if(DitemukanBarang == 0){
+		printf("\t\t Tidak ada barang yang ditemukan berdasarkan pencarian nama : \'%s\' \n", searchKey);
+	}
+	
 }
 
 // berfungsi untuk menambahkan hal baru ke dalam program
@@ -279,6 +325,112 @@ void menambahkanStockBarang(stock barang[], int totalBarang){
 	// array totalBarang yang terakhir yaitu totalBarang-1
 	inputStockBarang(&barang[totalBarang-1], nama,kategori,hargaBarang,
 	sisaStock,AmountSold,hari,bulan,tahun);
+}
+
+void menambahkanStockBarangL(struct stockLink *head){
+	
+	char nama[500];
+	int kategoriAngka;
+	KategoriEnum kategori;
+	int hargaBarang, sisaStock, AmountSold;
+	int hari, bulan, tahun;
+	
+	printf("\nMasukan Data Stock Barang\n");
+	
+	// Input Nama
+	printf("Input Nama Barang : ");
+	scanf(" %[^\n]", nama);
+	
+	// Input Kategori
+	printf("Kategori Barang :\n1. Makanan\n2. Minuman\n3. Pakaian\n4. Buku\n5. Alat Tulis\n6. Gadget\n7. Aksesoris\n");
+	
+	// Error Handling kalau salah input
+	do{
+		printf("Input Kategori Barang: ");
+		scanf(" %d", &kategoriAngka);
+		
+		if(kategoriAngka > 7 || kategoriAngka < 1)
+			printf("Input yang dimasukan melewati batas kategori.\n");
+		
+	}while(kategoriAngka > 7 || kategoriAngka < 1);
+	
+	switch(kategoriAngka){
+		case 1 : 
+			kategori = Makanan;
+			break;
+		case 2 :
+			kategori = Minuman;
+			break;
+		case 3 :
+			kategori = Pakaian;
+			break;
+		case 4 : 
+			kategori = Buku;
+			break;
+		case 5 : 
+			kategori = AlatTulis;
+			break;
+		case 6 : 
+			kategori = Gadget;
+			break;
+		case 7 : 
+			kategori = Aksesoris;
+			break;
+	}
+	
+	// Input harga Barang
+	do{
+		printf("Input harga Barang : Rp ");
+		scanf(" %d", &hargaBarang);
+		
+		if(hargaBarang < 0)
+			printf("Input yang dimasukkan melewati batas harga barang.\n");
+	}while(hargaBarang < 0);
+	
+	// Input Sisa Stock Barang
+	do{
+		printf("Input Sisa Stock Barang : ");
+		scanf(" %d", &sisaStock);
+		
+		if(sisaStock < 0)
+			printf("Input yang dimasukkan melewati batas sisa stock barang.\n");
+	}while(sisaStock < 0);
+	
+	// Input Barang yang terjual
+	do{
+		printf("Input Barang yang terjual : ");
+		scanf(" %d", &AmountSold);
+		
+		if(AmountSold < 0)
+			printf("Input yang dimasukkan melewati batas barang yang terjual.\n");
+	}while(AmountSold < 0);
+	
+	// Input Expired Hari 
+	do{
+		printf("Input Tanggal Hari Expired (1 - 31) : ");
+		scanf(" %d", &hari);
+		if(hari < 1 || hari > 31)
+			printf("Input tanggal hari melewati batas.\n");
+	}while(hari < 1 || hari > 31);
+	
+	// Input Expired Bulan
+	do{
+		printf("Input Tanggal Bulan Expired (1 - 12) : ");
+		scanf(" %d", &bulan);
+		if(bulan < 1 || bulan > 12)
+			printf("Input tanggal bulan melewati batas.\n");
+	}while(bulan < 1 || bulan > 12);
+	
+	// Input Expired Tahun
+	do{
+		printf("Input Tanggal Tahun Expired (2000 - 3000) : ");
+		scanf(" %d", &tahun);
+		if(tahun < 2000 || tahun > 3000)
+			printf("Input tanggal bulan melewati batas.\n");
+	}while(tahun < 2000 || tahun > 3000);
+	
+	
+	inputStockBarangL(head,nama,kategori,hargaBarang, sisaStock, AmountSold, hari, bulan, tahun);	
 }
 
 // menghapus suatu stock barang yang sudah ada di dalam program
@@ -414,111 +566,6 @@ void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kat
 	return;
 }
 
-void menambahkanStockBarangL(struct stockLink *head){
-	
-	char nama[500];
-	int kategoriAngka;
-	KategoriEnum kategori;
-	int hargaBarang, sisaStock, AmountSold;
-	int hari, bulan, tahun;
-	
-	printf("\nMasukan Data Stock Barang\n");
-	
-	// Input Nama
-	printf("Input Nama Barang : ");
-	scanf(" %[^\n]", nama);
-	
-	// Input Kategori
-	printf("Kategori Barang :\n1. Makanan\n2. Minuman\n3. Pakaian\n4. Buku\n5. Alat Tulis\n6. Gadget\n7. Aksesoris\n");
-	
-	// Error Handling kalau salah input
-	do{
-		printf("Input Kategori Barang: ");
-		scanf(" %d", &kategoriAngka);
-		
-		if(kategoriAngka > 7 || kategoriAngka < 1)
-			printf("Input yang dimasukan melewati batas kategori.\n");
-		
-	}while(kategoriAngka > 7 || kategoriAngka < 1);
-	
-	switch(kategoriAngka){
-		case 1 : 
-			kategori = Makanan;
-			break;
-		case 2 :
-			kategori = Minuman;
-			break;
-		case 3 :
-			kategori = Pakaian;
-			break;
-		case 4 : 
-			kategori = Buku;
-			break;
-		case 5 : 
-			kategori = AlatTulis;
-			break;
-		case 6 : 
-			kategori = Gadget;
-			break;
-		case 7 : 
-			kategori = Aksesoris;
-			break;
-	}
-	
-	// Input harga Barang
-	do{
-		printf("Input harga Barang : Rp ");
-		scanf(" %d", &hargaBarang);
-		
-		if(hargaBarang < 0)
-			printf("Input yang dimasukkan melewati batas harga barang.\n");
-	}while(hargaBarang < 0);
-	
-	// Input Sisa Stock Barang
-	do{
-		printf("Input Sisa Stock Barang : ");
-		scanf(" %d", &sisaStock);
-		
-		if(sisaStock < 0)
-			printf("Input yang dimasukkan melewati batas sisa stock barang.\n");
-	}while(sisaStock < 0);
-	
-	// Input Barang yang terjual
-	do{
-		printf("Input Barang yang terjual : ");
-		scanf(" %d", &AmountSold);
-		
-		if(AmountSold < 0)
-			printf("Input yang dimasukkan melewati batas barang yang terjual.\n");
-	}while(AmountSold < 0);
-	
-	// Input Expired Hari 
-	do{
-		printf("Input Tanggal Hari Expired (1 - 31) : ");
-		scanf(" %d", &hari);
-		if(hari < 1 || hari > 31)
-			printf("Input tanggal hari melewati batas.\n");
-	}while(hari < 1 || hari > 31);
-	
-	// Input Expired Bulan
-	do{
-		printf("Input Tanggal Bulan Expired (1 - 12) : ");
-		scanf(" %d", &bulan);
-		if(bulan < 1 || bulan > 12)
-			printf("Input tanggal bulan melewati batas.\n");
-	}while(bulan < 1 || bulan > 12);
-	
-	// Input Expired Tahun
-	do{
-		printf("Input Tanggal Tahun Expired (2000 - 3000) : ");
-		scanf(" %d", &tahun);
-		if(tahun < 2000 || tahun > 3000)
-			printf("Input tanggal bulan melewati batas.\n");
-	}while(tahun < 2000 || tahun > 3000);
-	
-	
-	inputStockBarangL(head,nama,kategori,hargaBarang, sisaStock, AmountSold, hari, bulan, tahun);	
-}
 
 void printDataLink(struct stockLink *head){
 	int i = 1;

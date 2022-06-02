@@ -1,13 +1,14 @@
 // KELOMPOK : 
 // Zefanya Christira Deardo - 2106637214
 // Seno Pamungkas Rahman - 2106731586
-// Michael Gunawan - 2106731195
+// Michael Gunawa=n - 2106731195
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "dataStruct.h"
 #include "functions.h"
+#include "tree.h"
 
 int main(){
 	stockL *head = NULL; 
@@ -15,7 +16,8 @@ int main(){
 	
 	int pilihanFitur;
 	
-	//data awal linked list
+	// data awal linked list
+	
 	strcpy(tmp->nama, "Sariroti keju");
 	tmp->kategori = Makanan;
 	tmp->hargaBarang = 5000;
@@ -31,7 +33,13 @@ int main(){
 	inputStockBarangL(head, "Pepsi 1,5L", Minuman, 15000, 20, 50, 7,12,2022);
 	inputStockBarangL(head, "Kemeja Batik", Pakaian, 70000, 3, 5, 1,1,2030);
 	inputStockBarangL(head, "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
-
+	
+	// data awal binary tree
+	treeNode *root = createTreeNode(10);
+	root->leftPtr = createTreeNode(5);
+	root->rightPtr = createTreeNode(9);
+	
+	
 	do {
 		int i = 0;
 		
@@ -51,8 +59,12 @@ int main(){
 		
 		instruksiPencet();
 		
+		printf("\nBinary Tree : \n\n");
+		print2D(root);
+		instruksiPencetTree();
+		
 		// Input fitur
-		inputAngkaErrorHandling("Pilihan Fitur : ", &pilihanFitur, 1, 6);
+		inputAngkaErrorHandling("\nPilihan Fitur : ", &pilihanFitur, 1, 10);
 		
 		switch(pilihanFitur){
 			
@@ -91,6 +103,7 @@ int main(){
 				break;
 		}
 		
-	} while(pilihanFitur != 6);
-	printf("\nterima kasih telah menggunakan program ini :D");	
+	} while(pilihanFitur != 10);
+	
+	printf("\nTerima kasih telah menggunakan program ini :D");	
 }

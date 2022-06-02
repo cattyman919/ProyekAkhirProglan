@@ -52,7 +52,6 @@ void instruksiPencet(){
 		printf("Pencet 3 untuk memilih fitur menambahkan stock barang\n");
 		printf("Pencet 4 untuk memilih fitur menghapus pilihan stock barang\n");
 		printf("Pencet 5 untuk memilih fitur mengedit pilihan stock barang\n");
-		printf("Pencet 6 untuk stop program stock barang\n");
 }
 
 // Untuk menginput stock barang pada program

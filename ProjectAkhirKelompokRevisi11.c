@@ -17,12 +17,6 @@ int main(){
 	int totalBarang = 4;
 	int pilihanFitur;
 	
-	// Menyediakan Data Stock Barang Awal
-	inputStockBarang(&stockBarang[0], "Sariroti keju", Makanan, 5000, 12, 20, 25,4,2022);
-	inputStockBarang(&stockBarang[1], "Pepsi 1,5L", Minuman, 15000, 20, 50, 7,12,2022);
-	inputStockBarang(&stockBarang[2], "Kemeja Batik", Pakaian, 70000, 3, 5, 1,1,2030);
-	inputStockBarang(&stockBarang[3], "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
-	
 	//data awal linked list
 	strcpy(tmp->nama, "Sariroti keju");
 	tmp->kategori = Makanan;
@@ -38,21 +32,11 @@ int main(){
 	inputStockBarangL(head, "Kemeja Batik", Pakaian, 70000, 3, 5, 1,1,2030);
 	inputStockBarangL(head, "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
 
-	
 	do {
 		int i = 0;
 		
 		printf("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< PROGRAM STOCK BARANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
-		
-		printf("Stock Barang Saat Ini : \n\n");
-		printf("|No\t |Nama barang\t |Kategori\t |Harga\t\t |Sisa Stock\t |Jumlah Terjual\t |Expired Date\n\n");
-		if(totalBarang > 0)
-			rekursiForLoopBarang(i , stockBarang, totalBarang);
-	
-		else{
-			printf("Tidak ada stock barang untuk saat ini \n");
-		}
-		
+			
 		printf("\nData Linked List : \n\n");
 		printDataLink(head);
 		
@@ -72,24 +56,25 @@ int main(){
 		switch(pilihanFitur){
 			
 			case 1 : 
-				fiturPengurutanData(stockBarang, totalBarang);
+				fiturPengurutanData(head);
 				break;
 				
 			case 2 :
-				fiturMencariData(stockBarang, totalBarang);
+				fiturMencariDataL(head);
 				break;
 			
 			case 3 : 
-				totalBarang++;
-				menambahkanStockBarang(stockBarang, totalBarang);
+				menambahkanStockBarangL(head);
 				break;
 			
 			case 4 :
 				// Kalau tidak ada stock barang, tidak bisa hapus pilihan barang
-				if(totalBarang > 0){
-					menghapusPilihanStockBarang(stockBarang, totalBarang);
+				if(head != NULL){
+					//menghapus=PilihanStockBarang(stockBarang, totalBarang);
+					menghapusPilihanStockBarangL(&head);
 					totalBarang--;
 				}
+				
 				else{
 					printf("Tidak bisa menghapus pilihan stock barang karena tidak ada stock barang\n");
 				}

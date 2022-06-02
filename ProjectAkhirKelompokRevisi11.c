@@ -38,15 +38,15 @@ int main(){
 		
 		printf("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< PROGRAM STOCK BARANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
 		
-		printf("Stock Barang Saat Ini : \n\n");
-		printf("|No\t |Nama barang\t |Kategori\t |Harga\t\t |Sisa Stock\t |Jumlah Terjual\t |Expired Date\n\n");
-		if(totalBarang > 0)
-			rekursiForLoopBarang(i , stockBarang, totalBarang);
-	
-		else{
-			printf("Tidak ada stock barang untuk saat ini \n");
-		}
-		
+//		printf("Stock Barang Saat Ini : \n\n");
+//		printf("|No\t |Nama barang\t |Kategori\t |Harga\t\t |Sisa Stock\t |Jumlah Terjual\t |Expired Date\n\n");
+//		if(totalBarang > 0)
+//			rekursiForLoopBarang(i , stockBarang, totalBarang);
+//	
+//		else{
+//			printf("Tidak ada stock barang untuk saat ini \n");
+//		}
+//		
 		printf("\nData Linked List : \n\n");
 		printDataLink(head);
 		
@@ -75,7 +75,8 @@ int main(){
 			
 			case 3 : 
 				totalBarang++;
-				menambahkanStockBarang(stockBarang, totalBarang);
+				//menambahkanStockBarang(stockBarang, totalBarang);
+				menambahkanStockBarangL(head);
 				break;
 			
 			case 4 :

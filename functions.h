@@ -19,6 +19,7 @@ void editStockBarang(stock barang[], int totalBarang);
 
 void printDataLink(struct stockLink *head);
 void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
+void menambahkanStockBarangL(struct stockLink *head);
 
 // Untuk mendapatkan string dari Enumerator Kategori
 const char* getKategoriNama(KategoriEnum kategori){
@@ -411,6 +412,112 @@ void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kat
 	}
 	temp->next = input;
 	return;
+}
+
+void menambahkanStockBarangL(struct stockLink *head){
+	
+	char nama[500];
+	int kategoriAngka;
+	KategoriEnum kategori;
+	int hargaBarang, sisaStock, AmountSold;
+	int hari, bulan, tahun;
+	
+	printf("\nMasukan Data Stock Barang\n");
+	
+	// Input Nama
+	printf("Input Nama Barang : ");
+	scanf(" %[^\n]", nama);
+	
+	// Input Kategori
+	printf("Kategori Barang :\n1. Makanan\n2. Minuman\n3. Pakaian\n4. Buku\n5. Alat Tulis\n6. Gadget\n7. Aksesoris\n");
+	
+	// Error Handling kalau salah input
+	do{
+		printf("Input Kategori Barang: ");
+		scanf(" %d", &kategoriAngka);
+		
+		if(kategoriAngka > 7 || kategoriAngka < 1)
+			printf("Input yang dimasukan melewati batas kategori.\n");
+		
+	}while(kategoriAngka > 7 || kategoriAngka < 1);
+	
+	switch(kategoriAngka){
+		case 1 : 
+			kategori = Makanan;
+			break;
+		case 2 :
+			kategori = Minuman;
+			break;
+		case 3 :
+			kategori = Pakaian;
+			break;
+		case 4 : 
+			kategori = Buku;
+			break;
+		case 5 : 
+			kategori = AlatTulis;
+			break;
+		case 6 : 
+			kategori = Gadget;
+			break;
+		case 7 : 
+			kategori = Aksesoris;
+			break;
+	}
+	
+	// Input harga Barang
+	do{
+		printf("Input harga Barang : Rp ");
+		scanf(" %d", &hargaBarang);
+		
+		if(hargaBarang < 0)
+			printf("Input yang dimasukkan melewati batas harga barang.\n");
+	}while(hargaBarang < 0);
+	
+	// Input Sisa Stock Barang
+	do{
+		printf("Input Sisa Stock Barang : ");
+		scanf(" %d", &sisaStock);
+		
+		if(sisaStock < 0)
+			printf("Input yang dimasukkan melewati batas sisa stock barang.\n");
+	}while(sisaStock < 0);
+	
+	// Input Barang yang terjual
+	do{
+		printf("Input Barang yang terjual : ");
+		scanf(" %d", &AmountSold);
+		
+		if(AmountSold < 0)
+			printf("Input yang dimasukkan melewati batas barang yang terjual.\n");
+	}while(AmountSold < 0);
+	
+	// Input Expired Hari 
+	do{
+		printf("Input Tanggal Hari Expired (1 - 31) : ");
+		scanf(" %d", &hari);
+		if(hari < 1 || hari > 31)
+			printf("Input tanggal hari melewati batas.\n");
+	}while(hari < 1 || hari > 31);
+	
+	// Input Expired Bulan
+	do{
+		printf("Input Tanggal Bulan Expired (1 - 12) : ");
+		scanf(" %d", &bulan);
+		if(bulan < 1 || bulan > 12)
+			printf("Input tanggal bulan melewati batas.\n");
+	}while(bulan < 1 || bulan > 12);
+	
+	// Input Expired Tahun
+	do{
+		printf("Input Tanggal Tahun Expired (2000 - 3000) : ");
+		scanf(" %d", &tahun);
+		if(tahun < 2000 || tahun > 3000)
+			printf("Input tanggal bulan melewati batas.\n");
+	}while(tahun < 2000 || tahun > 3000);
+	
+	
+	inputStockBarangL(head,nama,kategori,hargaBarang, sisaStock, AmountSold, hari, bulan, tahun);	
 }
 
 void printDataLink(struct stockLink *head){

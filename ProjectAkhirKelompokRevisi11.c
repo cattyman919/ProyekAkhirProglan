@@ -10,11 +10,9 @@
 #include "functions.h"
 
 int main(){
-	
-	stock stockBarang[5000];
 	stockL *head = NULL; 
 	stockL *tmp = (struct stockLink*) malloc(sizeof(struct stockLink)); 
-	int totalBarang = 4;
+	
 	int pilihanFitur;
 	
 	//data awal linked list
@@ -27,7 +25,9 @@ int main(){
 	tmp->expiredDate.mm = 4;
 	tmp->expiredDate.yyyy = 2022;
 	tmp->next = NULL;
+	
 	head = tmp;
+	
 	inputStockBarangL(head, "Pepsi 1,5L", Minuman, 15000, 20, 50, 7,12,2022);
 	inputStockBarangL(head, "Kemeja Batik", Pakaian, 70000, 3, 5, 1,1,2030);
 	inputStockBarangL(head, "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
@@ -51,16 +51,8 @@ int main(){
 		
 		instruksiPencet();
 		
-		// Error Handling jika salah input
-		do{
-			printf("Pilihan Fitur : ");
-			scanf(" %d", &pilihanFitur);
-			
-			if(pilihanFitur > 6 || pilihanFitur < 1)
-				printf("Input yang dimasukan melewati batas pilihan fitur.\n");
-				
-		}while(pilihanFitur > 6 || pilihanFitur < 1);
-		
+		// Input fitur
+		inputAngkaErrorHandling("Pilihan Fitur : ", &pilihanFitur, 1, 6);
 		
 		switch(pilihanFitur){
 			
@@ -79,11 +71,8 @@ int main(){
 			case 4 :
 				// Kalau tidak ada stock barang, tidak bisa hapus pilihan barang
 				if(head != NULL){
-					//menghapus=PilihanStockBarang(stockBarang, totalBarang);
 					menghapusPilihanStockBarangL(&head);
-					totalBarang--;
 				}
-				
 				else{
 					printf("Tidak bisa menghapus pilihan stock barang karena tidak ada stock barang\n");
 				}
@@ -92,7 +81,7 @@ int main(){
 				
 			case 5 :
 				// Kalau tidak ada stock barang, tidak bisa edit pilihan barang
-				if(totalBarang > 0){
+				if(totalBarangList(head) > 0){
 					editStockBarangL(head);
 				}
 				else{

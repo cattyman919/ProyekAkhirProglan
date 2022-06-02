@@ -20,15 +20,6 @@ typedef struct Date{
 } Date;
 
 // Struct untuk stock barangnya
-typedef struct stock{
-	char nama[200];
-	KategoriEnum kategori;
-	int hargaBarang;
-	int sisaStock;
-	int AmountSold;
-	Date expiredDate;	
-} stock;
-
 typedef struct stockLink{
 	char nama[200];
 	KategoriEnum kategori;

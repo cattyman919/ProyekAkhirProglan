@@ -1,7 +1,7 @@
 // KELOMPOK : 
 // Zefanya Christira Deardo - 2106637214
 // Seno Pamungkas Rahman - 2106731586
-// Michael Gunawa=n - 2106731195
+// Michael Gunawan - 2106731195
 
 #include <stdio.h>
 #include <string.h>
@@ -35,9 +35,9 @@ int main(){
 	inputStockBarangL(head, "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
 	
 	// data awal binary tree
-	treeNode *root = createTreeNode(10);
-	root->leftPtr = createTreeNode(5);
-	root->rightPtr = createTreeNode(7);
+	treeNode *root = createTreeNode(1);
+	root->leftPtr = createTreeNode(2);
+	root->rightPtr = createTreeNode(3);
 	
 	
 	do {

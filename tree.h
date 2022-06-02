@@ -17,11 +17,11 @@ treeNode* createTreeNode(int data);
 void insertNode (treeNode **root, int data);
 
 void instruksiPencetTree(){
-	printf("Pencet 6 untuk add/insert node\n");
-	printf("Pencet 7 untuk edit node\n");
-	printf("Pencet 8 untuk delete node\n");
-	printf("Pencet 9 untuk edit node\n");
-	printf("Pencet 10 untuk menghentikan program\n");
+	printf("Pencet 6 untuk memilih fitur add/insert node\n");
+	printf("Pencet 7 untuk memilih fitur edit node\n");
+	printf("Pencet 8 untuk memilih fitur delete node\n");
+	printf("Pencet 9 untuk memilih fitur search node\n");
+	printf("Pencet 10 untuk memilih fitur menghentikan program\n");
 }
 
 void inOrder (treeNode *root){

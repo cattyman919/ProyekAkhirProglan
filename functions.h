@@ -9,8 +9,8 @@ const char* getKategoriNama(KategoriEnum kategori);
 void rekursiForLoopBarang(int i , stock barang[], int totalBarang);
 void instruksiPencet();
 
-void inputStockBarang(stock *barang, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
-void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
+void inputStockBarang(stock *barang, char nama[500], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
+void inputStockBarangL (struct stockLink *head, char nama[500], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun);
 
 void outputStockBarangIndex(stock barang, int i);
 void outputStockBarangIndexL(struct stockLink *head, int i);
@@ -32,6 +32,8 @@ void editStockBarang(stock barang[], int totalBarang);
 void printDataLink(struct stockLink *head);
 
 int totalBarangList(struct stockLink *head);
+
+void inputAngkaErrorHandling(char description[500], int *angka, int min, int max);
 
 // Untuk mendapatkan string dari Enumerator Kategori
 const char* getKategoriNama(KategoriEnum kategori){
@@ -67,7 +69,7 @@ void instruksiPencet(){
 
 // Untuk menginput stock barang pada program
 // Menggunakan pointer untuk pass by reference, agar berubah di void main
-void inputStockBarang(stock *barang, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun){
+void inputStockBarang(stock *barang, char nama[500], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun){
 	
 	// Mengisi Nama
 	strcpy(barang->nama, nama);
@@ -90,7 +92,7 @@ void inputStockBarang(stock *barang, char nama[200], KategoriEnum kategori,int h
 	barang->expiredDate.yyyy = tahun;
 }
 
-void inputStockBarangL (struct stockLink *head, char nama[200], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun){
+void inputStockBarangL (struct stockLink *head, char nama[500], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun){
 	struct stockLink *input = malloc(sizeof(struct stockLink));
 	// Mengisi Nama
 	strcpy(input->nama, nama);
@@ -152,14 +154,8 @@ void fiturPengurutanData(stockL *head){
 	printf("4. Harga\n");
 	printf("5. Masa Expired\n");
 	printf("6. Sisa Stock\n");
-	
-	do{
-		printf("Input pilihan pengurutan data : ");
-		scanf(" %d", &inputPilihan);
-		
-		if(inputPilihan < 1 || inputPilihan > 6)
-			printf("Input yang dimasukan melewati pilihan.\n");
-	}while(inputPilihan < 1 || inputPilihan > 6);
+
+	inputAngkaErrorHandling("Input pilihan pengurutan data : ", &inputPilihan, 1,6);
 	
 	switch(inputPilihan){
 		case 1 :
@@ -438,29 +434,13 @@ void menambahkanStockBarangL(struct stockLink *head){
 	}while(AmountSold < 0);
 	
 	// Input Expired Hari 
-	do{
-		printf("Input Tanggal Hari Expired (1 - 31) : ");
-		scanf(" %d", &hari);
-		if(hari < 1 || hari > 31)
-			printf("Input tanggal hari melewati batas.\n");
-	}while(hari < 1 || hari > 31);
+	inputAngkaErrorHandling("Input Tanggal Hari Expired (1 - 31) : ", &hari, 1, 31);
 	
 	// Input Expired Bulan
-	do{
-		printf("Input Tanggal Bulan Expired (1 - 12) : ");
-		scanf(" %d", &bulan);
-		if(bulan < 1 || bulan > 12)
-			printf("Input tanggal bulan melewati batas.\n");
-	}while(bulan < 1 || bulan > 12);
+	inputAngkaErrorHandling("Input Tanggal Bulan Expired (1 - 12) : ", &bulan, 1, 12);
 	
 	// Input Expired Tahun
-	do{
-		printf("Input Tanggal Tahun Expired (2000 - 3000) : ");
-		scanf(" %d", &tahun);
-		if(tahun < 2000 || tahun > 3000)
-			printf("Input tanggal bulan melewati batas.\n");
-	}while(tahun < 2000 || tahun > 3000);
-	
+	inputAngkaErrorHandling("Input Tanggal Tahun Expired (2000 - 3000) : ", &tahun, 2000, 3000);
 	
 	inputStockBarangL(head,nama,kategori,hargaBarang, sisaStock, AmountSold, hari, bulan, tahun);	
 }
@@ -637,4 +617,15 @@ int totalBarangList(struct stockLink *head){
 	return count;	
 }
 
+void inputAngkaErrorHandling(char description[500], int *angka, int min, int max){
+	do{
+
+		printf("%s", description);
+		scanf(" %d", angka);
+		
+		if(*angka > max || *angka < min){
+			printf("Input yang dimasukan salah, Input melewati batas\n");
+		}
+	}while(*angka > max || *angka < min);
+}
 #endif

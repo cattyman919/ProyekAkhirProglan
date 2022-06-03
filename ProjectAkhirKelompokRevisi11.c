@@ -155,6 +155,7 @@ int main(){
 				
 				root = deleteNode(root, data);
 				
+			break;
 			case 9 :
 				// Menerima input search node
 				printf("Masukkan angka untuk dicari pada node : ");

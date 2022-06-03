@@ -14,7 +14,7 @@ int main(){
 	stockL *head = NULL; 
 	stockL *tmp = (struct stockLink*) malloc(sizeof(struct stockLink)); 
 	
-	int arrayTree[5000] = {};
+	int arrayTree[50000] = {};
 	
 	int pilihanFitur;
 	
@@ -44,8 +44,12 @@ int main(){
 	do {
 		int i = 0, data;
 		int angkaTidakAda = 1;
-		int size = sizeof(arrayTree)/sizeof(arrayTree[0]);
+		
+		// Mendapatkan array dari tree node
 		getArrayTree(root,arrayTree,0);
+		
+		// Mendapatkan size array dari arrayTree
+		int size = sizeof(arrayTree)/sizeof(arrayTree[0]);
 		
 		printf("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< PROGRAM STOCK BARANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
 		printf("Stock Barang Saat Ini : \n");
@@ -119,9 +123,8 @@ int main(){
 					scanf(" %d", &data);
 		
 					for(i = 0 ; i < size; i++ ){
-						if(data == arrayTree[i]){
-							angkaTidakAda = 0;
-						}
+						if(data == arrayTree[i])
+							angkaTidakAda = 0;	
 					}
 					
 					if(angkaTidakAda == 1) 
@@ -143,9 +146,8 @@ int main(){
 					scanf(" %d", &data);
 		
 					for(i = 0 ; i < size; i++ ){
-						if(data == arrayTree[i]){
+						if(data == arrayTree[i])
 							angkaTidakAda = 0;
-						}
 					}
 					
 					if(angkaTidakAda == 1) 
@@ -162,9 +164,8 @@ int main(){
 				scanf(" %d", &data);
 	
 				for(i = 0 ; i < size; i++ ){
-					if(data == arrayTree[i]){
+					if(data == arrayTree[i])
 						angkaTidakAda = 0;
-					}
 				}
 				
 				if(angkaTidakAda == 1) 

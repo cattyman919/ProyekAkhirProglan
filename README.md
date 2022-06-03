@@ -1,7 +1,9 @@
 # Proyek Akhir Pemrograman Lanjut
 
-Proyek github ini merupakan tentang proyek akhir pemrograman lanjut tentang stock barang dan binary tree
+Proyek github ini merupakan tentang proyek akhir pemrograman lanjut tentang stock barang dan binary tree.
+
 Program ini akan merupakan tentang stock barang, dimana kita bisa menyimpan, menambahkan, menghapus, mengsorting, dan mengedit stock barang yang kita punya.
+
 Program ini juga terdapat binary tree untuk di coba-coba, Pada binary tree kita bisa menambahkan, mengedit, menghapus, mencari node-node tertentu. 
 
 ## dataStruct.h

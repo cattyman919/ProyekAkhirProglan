@@ -97,6 +97,7 @@ void insertNode(treeNode **root, int data){
 	
 }
 
+// Mengedit node
 void editNode(treeNode** root,int key)
 {
 	int dataBaru;

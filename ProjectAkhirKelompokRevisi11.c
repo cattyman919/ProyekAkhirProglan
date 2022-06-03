@@ -111,6 +111,9 @@ int main(){
 			break;
 			
 			case 7:
+				// Menerima input edit node 
+				// jika node tidak ditemukan, terdapat error handling
+				// dan meminta inputnya lagi
 				do {	
 					printf("Pilih angka dari tree node untuk diedit : ");
 					scanf(" %d", &data);
@@ -122,19 +125,52 @@ int main(){
 					}
 					
 					if(angkaTidakAda == 1) 
-					printf("Angka yang dimasukkan tidak ada pada node\n");
+					printf("Angka %d yang dimasukkan tidak terdapat pada tree node\n", data);
 					
 				} while(angkaTidakAda == 1);
 
 				editNode(&root, data);
-				
+	=			
 				angkaTidakAda = 1;
 			break;
 			
 			case 8 :
-				printf("Masukkan angka pada node untuk dihapus : ");
-				scanf(" %d", &data);
+				// Menerima input delete node 
+				// jika node tidak ditemukan, terdapat error handling
+				// dan meminta inputnya lagi
+				do {	
+					printf("Masukkan angka pada node untuk dihapus : ");
+					scanf(" %d", &data);
+		
+					for(i = 0 ; i < size; i++ ){
+						if(data == arrayTree[i]){
+							angkaTidakAda = 0;
+						}
+					}
+					
+					if(angkaTidakAda == 1) 
+						printf("Angka %d yang dimasukkan tidak terdapat pada tree node\n", data);
+					
+				} while(angkaTidakAda == 1);
+				
 				root = deleteNode(root, data);
+				
+			case 9 :
+				// Menerima input search node
+				printf("Masukkan angka untuk dicari pada node : ");
+				scanf(" %d", &data);
+	
+				for(i = 0 ; i < size; i++ ){
+					if(data == arrayTree[i]){
+						angkaTidakAda = 0;
+					}
+				}
+				
+				if(angkaTidakAda == 1) 
+					printf("Angka %d yang dimasukkan tidak terdapat pada tree node\n", data);
+				else
+					printf("Angka %d terdapat pada tree node\n", data);
+				
 			break;
 			
 		}

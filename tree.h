@@ -17,6 +17,7 @@ treeNode* deleteNode (treeNode* root, int key);
 void print2DUtil(treeNode *root, int space);
 void print2D(treeNode *root);
 
+// Mendapatkan array untuk node tree
 int getArrayTree(treeNode* root, int arr[], int i){
 	
 	if(root == NULL)
@@ -41,16 +42,11 @@ void instruksiPencetTree(){
 	printf("Pencet 10 untuk memilih fitur menghentikan program\n");
 }
 
-/* Given a non-empty binary search
-   tree, return the node
-   with minimum key value found in
-   that tree. Note that the
-   entire tree does not need to be searched. */
+// Mendapatkan nilai minimum di tree nodenya
 treeNode* minValueNode(treeNode* node)
 {
     treeNode* current = node;
  
-    /* loop down to find the leftmost leaf */
     while (current && current->leftPtr != NULL)
         current = current->leftPtr;
  
@@ -167,32 +163,28 @@ treeNode* deleteNode (treeNode* root, int key){
 // Memprint output binary tree
 void print2DUtil(treeNode *root, int space)
 {
-    // Base case
+
     if (root == NULL)
         return;
  
-    // Increase distance between levels
     space += COUNT;
  
-    // Process right child first
     print2DUtil(root->rightPtr, space);
  
-    // Print current node after space
-    // count
     printf("\n");
     int i;
     for (i = COUNT; i < space; i++)
         printf(" ");
     printf("%d\n", root->data);
  
-    // Process left child
+
     print2DUtil(root->leftPtr, space);
 }
  
-// Wrapper over print2DUtil()
+
 void print2D(treeNode *root)
 {
-   // Pass initial space count as 0
+
    print2DUtil(root, 0);
 }
 #endif

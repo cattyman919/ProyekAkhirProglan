@@ -13,6 +13,7 @@ void instruksiPencetTree();
 treeNode* minValueNode(treeNode* node);
 treeNode* createTreeNode(int data);
 void insertNode (treeNode **root, int data);
+void editNode(treeNode** root,int key);
 treeNode* deleteNode (treeNode* root, int key);
 void print2DUtil(treeNode *root, int space);
 void print2D(treeNode *root);

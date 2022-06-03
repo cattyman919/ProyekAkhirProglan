@@ -56,8 +56,8 @@ void instruksiPencet(){
 
 // Untuk menginput stock barang pada program
 // Menggunakan pointer untuk pass by reference, agar berubah di void main
-
 void inputStockBarangL (struct stockLink *head, char nama[500], KategoriEnum kategori,int hargaBarang, int sisaStock,int AmountSold, int hari, int bulan, int tahun){
+	
 	struct stockLink *input = malloc(sizeof(struct stockLink));
 	// Mengisi Nama
 	strcpy(input->nama, nama);
@@ -418,7 +418,6 @@ int totalBarangList(struct stockLink *head){
 
 	return count;	
 }
-
 
 // Menerima input angka dengan error handling angka minimum dan maksimum
 void inputAngkaErrorHandling(char description[500], int *angka, int min, int max){

@@ -11,8 +11,9 @@
 #include "tree.h"
 
 int main(){
-	stockL *head = NULL; 
-	stockL *tmp = (struct stockLink*) malloc(sizeof(struct stockLink)); 
+
+	// Inisialisasi data linked list
+	stockL *head = (struct stockLink*) malloc(sizeof(struct stockLink));
 	
 	int arrayTree[50000] = {};
 	
@@ -20,26 +21,23 @@ int main(){
 	
 	// data awal linked list
 	
-	strcpy(tmp->nama, "Sariroti keju");
-	tmp->kategori = Makanan;
-	tmp->hargaBarang = 5000;
-	tmp->sisaStock = 12;
-	tmp->AmountSold = 20;
-	tmp->expiredDate.dd = 20;
-	tmp->expiredDate.mm = 4;
-	tmp->expiredDate.yyyy = 2022;
-	tmp->next = NULL;
-	
-	head = tmp;
+	strcpy(head->nama, "Sariroti keju");
+	head->kategori = Makanan;
+	head->hargaBarang = 5000;
+	head->sisaStock = 12;
+	head->AmountSold = 20;
+	head->expiredDate.dd = 20;
+	head->expiredDate.mm = 4;
+	head->expiredDate.yyyy = 2022;
+	head->next = NULL;
 	
 	inputStockBarangL(head, "Pepsi 1,5L", Minuman, 15000, 20, 50, 7,12,2022);
 	inputStockBarangL(head, "Kemeja Batik", Pakaian, 70000, 3, 5, 1,1,2030);
 	inputStockBarangL(head, "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
 	
 	// data awal binary tree
-	treeNode *root = createTreeNode(5);
+	treeNode *root = createTreeNode(8);
 	root->leftPtr = createTreeNode(2);
-	root->rightPtr = createTreeNode(3);
 	
 	do {
 		int i = 0, data;
@@ -57,7 +55,7 @@ int main(){
 		printf("\nData Linked List : \n\n");
 		printf("|No\t |Nama barang\t |Kategori\t |Harga\t\t |Sisa Stock\t |Jumlah Terjual\t |Expired Date\n\n");
 			
-		
+		// Print data stock linked list
 		if(totalBarangList(head) > 0)
 			printDataLink(head);
 	
@@ -128,7 +126,7 @@ int main(){
 					}
 					
 					if(angkaTidakAda == 1) 
-					printf("Angka %d yang dimasukkan tidak terdapat pada tree node\n", data);
+						printf("Angka %d yang dimasukkan tidak terdapat pada tree node\n", data);
 					
 				} while(angkaTidakAda == 1);
 
@@ -145,7 +143,7 @@ int main(){
 					printf("Masukkan angka pada node untuk dihapus : ");
 					scanf(" %d", &data);
 		
-					for(i = 0 ; i < size; i++ ){
+					for(i = 0 ; i < size; i++){
 						if(data == arrayTree[i])
 							angkaTidakAda = 0;
 					}
@@ -158,12 +156,14 @@ int main(){
 				root = deleteNode(root, data);
 				
 			break;
+			
 			case 9 :
+				
 				// Menerima input search node
 				printf("Masukkan angka untuk dicari pada node : ");
 				scanf(" %d", &data);
-	
-				for(i = 0 ; i < size; i++ ){
+				
+				for(i = 0 ; i < size; i++){
 					if(data == arrayTree[i])
 						angkaTidakAda = 0;
 				}

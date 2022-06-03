@@ -130,7 +130,7 @@ int main(){
 				} while(angkaTidakAda == 1);
 
 				editNode(&root, data);
-	=			
+			
 				angkaTidakAda = 1;
 			break;
 			

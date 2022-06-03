@@ -14,6 +14,8 @@ int main(){
 	stockL *head = NULL; 
 	stockL *tmp = (struct stockLink*) malloc(sizeof(struct stockLink)); 
 	
+	int arrayTree[5000] = {};
+	
 	int pilihanFitur;
 	
 	// data awal linked list
@@ -35,13 +37,15 @@ int main(){
 	inputStockBarangL(head, "Advan G9 Pro", Gadget, 1400000, 2, 1, 1,1,2030);
 	
 	// data awal binary tree
-	treeNode *root = createTreeNode(1);
+	treeNode *root = createTreeNode(5);
 	root->leftPtr = createTreeNode(2);
 	root->rightPtr = createTreeNode(3);
 	
-	
 	do {
 		int i = 0, data;
+		int angkaTidakAda = 1;
+		int size = sizeof(arrayTree)/sizeof(arrayTree[0]);
+		getArrayTree(root,arrayTree,0);
 		
 		printf("\n\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< PROGRAM STOCK BARANG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
 		printf("Stock Barang Saat Ini : \n");
@@ -70,17 +74,14 @@ int main(){
 			
 			case 1 : 
 				fiturPengurutanData(head);
-				
 			break;
 				
 			case 2 :
 				fiturMencariDataL(head);
-				
 			break;
 			
 			case 3 : 
 				menambahkanStockBarangL(head);
-				
 			break;
 			
 			case 4 :
@@ -91,7 +92,6 @@ int main(){
 				else{
 					printf("Tidak bisa menghapus pilihan stock barang karena tidak ada stock barang\n");
 				}
-
 			break;
 				
 			case 5 :
@@ -102,16 +102,41 @@ int main(){
 				else{
 					printf("Tidak bisa mengedit pilihan stock barang karena tidak ada stock barang\n");
 				}
-				
 			break;
 			
 			case 6 :
-
 				printf("Masukkan angka untuk data node : ");
 				scanf(" %d", &data);
-				insertNode(&root,data);
-				
+				insertNode(&root,data);	
 			break;
+			
+			case 7:
+				do {	
+					printf("Pilih angka dari tree node untuk diedit : ");
+					scanf(" %d", &data);
+		
+					for(i = 0 ; i < size; i++ ){
+						if(data == arrayTree[i]){
+							angkaTidakAda = 0;
+						}
+					}
+					
+					if(angkaTidakAda == 1) 
+					printf("Angka yang dimasukkan tidak ada pada node\n");
+					
+				} while(angkaTidakAda == 1);
+
+				editNode(&root, data);
+				
+				angkaTidakAda = 1;
+			break;
+			
+			case 8 :
+				printf("Masukkan angka pada node untuk dihapus : ");
+				scanf(" %d", &data);
+				root = deleteNode(root, data);
+			break;
+			
 		}
 		
 	} while(pilihanFitur != 10);

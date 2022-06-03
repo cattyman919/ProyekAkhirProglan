@@ -389,21 +389,20 @@ void editStockBarangL(struct stockLink *head){
 	pointer->expiredDate.yyyy = tahun;
 }
 
+// Memprint output seluruh stock data barang pada linked list
 void printDataLink(struct stockLink *head){
 	int i = 1;
 	struct stockLink *barang = head;
 	while(barang != NULL) {
-		printf("|%d\t |%s\t |%s\t |Rp %d\t", i , barang->nama, getKategoriNama(barang->kategori), barang->hargaBarang);
-		printf(" |%d\t\t |%d\t\t\t", barang->sisaStock, barang->AmountSold);
-		printf(" |%d/%d/%d\n", 
-		barang->expiredDate.dd,
-		barang->expiredDate.mm,
-		barang->expiredDate.yyyy);
+		
+		outputStockBarangIndexL(barang, i);
+		
 		barang = barang->next;
 		i++;
 	}
 }
 
+// Mencari total barang pada linked list
 int totalBarangList(struct stockLink *head){
 	struct stockLink *pointer = head;
 	int count = 0;
@@ -420,6 +419,8 @@ int totalBarangList(struct stockLink *head){
 	return count;	
 }
 
+
+// Menerima input angka dengan error handling angka minimum dan maksimum
 void inputAngkaErrorHandling(char description[500], int *angka, int min, int max){
 	do{
 

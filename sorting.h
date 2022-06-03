@@ -13,7 +13,6 @@ void sortAlphabetL(stockL *head){
     stockL *barang;
     stockL *lptr = NULL;
     
-    /* Checking for empty list */
     if (head == NULL)
         return;
     do {
@@ -38,7 +37,6 @@ void sortKategoriL(stockL *head){
     stockL *barang;
     stockL *lptr = NULL;
     
-    /* Checking for empty list */
     if (head == NULL)
         return;
     do {
@@ -59,11 +57,10 @@ void sortKategoriL(stockL *head){
 
 // mengurutkan secara penjualan terlaris dengan insertion sort
 void sortBarangTerlarisL(stockL *head){
-		int swapped, i;
+	int swapped, i;
     stockL *barang;
     stockL *lptr = NULL;
     
-    /* Checking for empty list */
     if (head == NULL)
         return;
     do {
@@ -88,7 +85,6 @@ void sortHargaL(stockL *head){
     stockL *barang;
     stockL *lptr = NULL;
     
-    /* Checking for empty list */
     if (head == NULL)
         return;
     do {
@@ -109,11 +105,10 @@ void sortHargaL(stockL *head){
 
 // mengurutkan secara masa expired dengan insertion sort
 void sortMasaExpiredL(stockL *head){
-		int swapped, i;
+	int swapped, i;
     stockL *barang;
     stockL *lptr = NULL;
     
-    /* Checking for empty list */
     if (head == NULL)
         return;
     do {
@@ -143,7 +138,6 @@ void sortSisaStockL(stockL *head){
     stockL *barang;
     stockL *lptr = NULL;
     
-    /* Checking for empty list */
     if (head == NULL)
         return;
     do {
